@@ -67,7 +67,8 @@ The Power BI report is designed for easy navigation for readers. The report also
 _Data Transformation_
 - DAX Query was essential for exploring raw imported dataset, detecting problematic areas, as well as for creating measures based on the data for deriving KPIs.
 - Raw CSV and excel spreadsheets are imported and transformed with Power Query editor prior to any visualizations or analysis.
-- Maintaining the data model was an importeant component for organizing relationships between related datasets. 
+- Maintaining the data model was an importeant component for organizing relationships between related datasets.
+- For each data page, the tool tips are modified to display a bar graph which shows the top 3 revenue generating product categories - depending on how the data is filtered by the selection of data elements on that page.
 
 _Data Tables of the Report_
 - The **sales_total_2** table has the order_id  column as its primary key, with other columns containing the count of sales, the price, the revenue, the stock, the store id. the product_id, order_date, promo_type, promo_bin, promo_discount and Discount Price (a calculated column with DAX). This is the fact table.
@@ -81,6 +82,7 @@ _Data Tables of the Report_
 _Data Visualization_
 - The report contains several pages which demonstrate different methods of analyzing revenue and costs associated with enterprise operations from 2017 to 2019
 - **Unpivot** page contains unpivoted cost data, where costs are displayed in a stacked column chart, columns are organized by store_id, and the portion of cost is color coded by cost type within each column. There is also a bar chart for sum of revenue per state. This page also contains 2 slicers. One for filtering by state and within each state by city for stores in the store_id to cost bar chart; the second a slider for filtering by interval of price range of products sold, to be included in the revenue aggregation.
-- **Details** page contains date based KPIs with formatted dates. There is also a bar graph which displays revenue by weekdays. The page also displays the total revenue and the total sales. 
+- **Details** page contains date based KPIs with formatted dates. One of the tables contain order dates with the sum of sales and the sum of revenue for that date. The second table contains the name of the product - the width, length and depth dimensions of its packaging as well as the calculated column for Volume. There is a bar graph which displays revenue by weekdays. The page also displays the total revenue and the total sales.
+-  The **Maps** page displays a line chart with revenue by year, quarter and month, with ML-based forecasting - for the next 10 quarters, taking into account weekly seasonality, at a 95% confidence level. There is also a map-based chart which shows amount of revenue by state and city using latitude and longitude to map locations.
 
 
