@@ -1,6 +1,6 @@
 # Enterprise 10-Q Reporting 
 
-## Standardization Aggregatoin and KPIs for Expense Reporting - VBA MAcro
+## Standardization Aggregatoin and KPIs for Expense Reporting - VBA Macro
 
 This VBA automation data pipeline is designed to streamline enterprise expense tracking and quarterly reporting by consolidating data across multiple worksheets into a single, standardized quarterly report.
 
