@@ -59,7 +59,10 @@ _Development note: VLOOKUP -> XLOOKUP -> INDEX/MATCHING:_
 The second part of this Enterprise 10-Q ETL is visualization of enterprise sales, revenue and costs using Power BI. Made as a follow up to the VBA Macro tool
 
 The Power BI report is designed for easy navigation for readers. The report also leverages dynamic RLS (role level security) to ensure controlled user access priviledges. The primary report page is the _Page Navigation_ page. This page is directly integrated with RLS, ensuring controlled access. The page has a selection panel for various pages in the report containing graphical analysis of the enterprise finances. Once a panel selection is made, the button click redirects the user to the selected report page.
-- RLS related data is contained in the **Security Table** and the **PLS** datasets. 
+- RLS related data is contained in the **Security Table** and the **PLS** datasets.
+- The **Security Table** contains a column with user identities, a column for user emails, and a column with a state name to indicate which region's data the user has access to across the report - relative to their role in the enterprise. This is specifically demonstrating how the data access can be partitioned for managers of different divisions within the enterprise.
+- The **PLS** is a table containing a column with emails and a column called Page Access with the names of pages which the user of the email has access to within the report.
+- In both cases dynamic RLS works by detecting ehich user is signed in, to adjust the visbility of report data.
 
 _Data Transformation_
 - DAX Query was essential for exploring raw imported dataset, detecting problematic areas, as well as for creating measures based on the data for deriving KPIs.
@@ -67,7 +70,17 @@ _Data Transformation_
 - Maintaining the data model was an importeant component for organizing relationships between related datasets. 
 
 _Data Tables of the Report_
-- the **sales_total_2** table has the order_id  column as its primary key, with other columns containing the count of sales, the price, the revenue, the stock, the store id. the product_id, order_date, promo_type, promo_bin, promo_discount and Discount Price (a calculated column with DAX). This is the primary table.
-- the **producthierarchy** table contains product specific details. It has the product_id as its primary key - which is also the foreign key in the sales_total_2 table. This table contains columns: category, sub-category, product (brand), type, length, width, depth and Volume - a calculated column derived from length/depth/width.
-- 
+- The **sales_total_2** table has the order_id  column as its primary key, with other columns containing the count of sales, the price, the revenue, the stock, the store id. the product_id, order_date, promo_type, promo_bin, promo_discount and Discount Price (a calculated column with DAX). This is the fact table.
+- The **producthierarchy** table contains product specific details. The product_id keys relate the producthierarchy table to the sales_total_2 table. This table is a dimension table for product-related information. This table contains columns: category, sub-category, product (brand), type, length, width, depth and Volume - a calculated column derived from length/depth/width. 
+- The **store_cities** table contains information about the stores and their geographical location. This table is a dimension table for store information. The store_id keys relate the store_cities table to the sales_total_2 table. This table contains columns: city, city_id, cost, cost type, latitude, longitude, state, state_id, store size in m^3, state abbreviation, and store_type_id.
+- The **DateTable** is a dimension table for order dates. This table relates to the fact table through the order_date column. This table contains columns such as: weekday, date, date as integer, quarter, month number, month short, year month, etc. It was useful for formatting different visuals.
+- The **Measure table** contained differet derived statistics and KPIs which were essenntial for visualizations:
+
+      total revenue, Base Pkg Dimension, Cost of Order, Cost of Order Filter California, AVG Product Price 7%, AVG layout dim, Logistic Category Costs, Logistic Category Costs with Volume, All Costs, % Cost, % Cost state only, Cost Previous, Change in Cost, YTD Cost, YTD Revenue, Monday sales shares, All Revenue, % Revenue by Category, % Revenue Beauty & Hygiene, and YTD Revenue till August 2018...
+
+_Data Visualization_
+- The report contains several pages which demonstrate different methods of analyzing revenue and costs associated with enterprise operations from 2017 to 2018
+- Unpivot page contains unpivoted cost data, where costs are displayed in a stacked column chart, columns are organized by store_id, and the portion of cost is color coded by cost type within each column. There is also a bar chart for sum of revenue per state. This page also contains 2 slicers. One for filtering by state and within each state by city for stores in the store_id to cost bar chart; the second a slider for filtering by interval of price range of products sold, to be included in the revenue aggregation.
+
+
 
