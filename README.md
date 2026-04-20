@@ -52,5 +52,7 @@ _Development note: VLOOKUP -> XLOOKUP -> INDEX/MATCHING:_
 - When matches are found for the composite key, results are collected and processed based on what KPIs (sum, average or standard deviation) the user wants to calculate.
 - The result appears as output.
 
-**_TO BE CONTINUED WITH: PowerQuery - The M Language of PowerBI - Data Visualization_**
+**_PowerBI - Sales Data Visualization_**
+
+The second part of this ETL was visualization of enterpreise sales revenue and costs using Power BI.
 
